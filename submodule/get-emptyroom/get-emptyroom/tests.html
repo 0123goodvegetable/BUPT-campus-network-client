@@ -1,0 +1,418 @@
+<html>
+<head>
+    <title>列表</title>
+    <link href="/css/newcss/project.css" rel="stylesheet" type="text/css">
+</head>
+<script language="javascript">
+    function xzzc(url, swidth, sheight) {
+        if (swidth == undefined) swidth = "300";
+        if (sheight == undefined) sheight = "240";
+        var a = new Array;
+        a = showModalDialog(url, window,
+            "dialogWidth:" + swidth + "px;dialogHeight:" + sheight + "px;help:no;status:no");
+        //var b=a.join();
+        //alert(b);
+        if (a == null) {
+        } else {
+            var xs = zcXs(a);
+            document.zxForm.zxZc.value = xs;
+        }
+
+    }
+
+    // 节次
+    function xzjc(url, swidth, sheight) {
+        if (swidth == undefined) swidth = "300";
+        if (sheight == undefined) sheight = "220";
+        var a = new Array;
+        a = showModalDialog(url, window,
+            "dialogWidth:" + swidth + "px;dialogHeight:" + sheight + "px;help:no;status:no");
+        //var b=a.join();
+        //alert(b);
+        if (a == null) {
+        } else {
+            var xs = zcXs(a);
+            document.zxForm.zxJc.value = xs;
+        }
+    }
+
+    // 星期
+    function xzxq(url, swidth, sheight) {
+        if (swidth == undefined) swidth = "300";
+        if (sheight == undefined) sheight = "220";
+        var a = new Array;
+        a = showModalDialog(url, window,
+            "dialogWidth:" + swidth + "px;dialogHeight:" + sheight + "px;help:no;status:no");
+        //var b=a.join();
+        //alert(b);
+        if (a == null) {
+        } else {
+            var xs = zcXs(a);
+            document.zxForm.zxxq.value = xs;
+        }
+
+    }
+
+    // 拼接显示
+    function zcXs(zcList) {
+        var xs = "";
+        for (var i = 0; i < zcList.length; i++) {
+            if (i == 0) {
+                xs += zcList[0];
+            } else {
+                xs += ",";
+                xs += zcList[i];
+            }
+        }
+        return xs;
+    }
+
+    function temp(url, swidth, sheight) {
+        document.zxForm.action = url;
+        document.zxForm.submit();
+    }
+
+    // 把周次显示置空
+    function qkZc() {
+        document.zxForm.zxZc.value = "";
+    }
+
+    // 清空节次
+    function qkJc() {
+        document.zxForm.zxJc.value = "";
+    }
+
+    // 清空节次
+    function qkxq() {
+        document.zxForm.zxxq.value = "";
+    }
+
+    // 条件查询
+    function tjcx() {
+        var flag = false;
+        if (document.zxForm.zxZc.value) flag = true;
+        if (document.zxForm.zxJc.value) flag = true;
+        if (document.zxForm.zxxq.value) flag = true;
+        if (flag) {
+            document.zxForm.action = "xszxcxAction.do?oper=tjcx";
+            document.zxForm.submit();
+        } else {
+            alert("至少选择一个时间查询条件");
+        }
+
+    }
+
+    // 联动显示
+    function changelocation(jxlh) {
+        var xsh = xsh;
+        document.zxForm.action = "xszxcxAction.do?oper=ld";
+        document.zxForm.target = "_self";
+        document.zxForm.submit();
+    }
+
+    <!--决定二级select显示的函数-->
+
+    function changelocationClassroom(xqh, jxlh) {
+
+        var locationid = locationid;
+        var i;
+        document.zxForm.action = "xszxcxAction.do?oper=ld&xqh=" + xqh + "&jxlh=" + jxlh + "";
+        document.zxForm.target = "_self";
+        document.zxForm.submit();
+
+    }
+
+    // 教室占用情况
+    function jaszy(url) {
+        document.zxForm.action = url;
+        document.zxForm.submit();
+    }
+</script>
+<script language="javascript" src="js/date/calendar.js"></script>
+<body leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="overflow:auto;">
+
+<form action="" name="zxForm" method="post">
+    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="Linetop"></td>
+        </tr>
+    </table>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="title" id="tblHead">
+        <tr>
+            <td width="50%">
+                <table border="0" align="left" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td valign="middle">&nbsp;<b>列表</b>&nbsp;</td>
+                    </tr>
+                </table>
+        </tr>
+    </table>
+    <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="Linetop"></td>
+        </tr>
+    </table>
+    <table border="0" cellpadding="0" cellspacing="0" class="titleTop1">
+        <tr>
+            <td>
+                <table border="0" cellpadding="0" cellspacing="0" class="titleTop1">
+                    <tr>
+                        <td>
+                            <table border="0" cellpadding="0" cellspacing="0">
+
+                                <tr>
+                                    <td class="fieldName">学年学期:
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td>
+                                        <select name="zxxnxq" class="select">
+                                            <option value=""></option>
+
+                                            <option value="2009-2010-2-2">2009-2010学年第二学期(春)(三学期)</option>
+
+                                            <option value="2010-2011-1-2">2010-2011学年第一学期(秋)(三学期)</option>
+
+                                            <option value="2010-2011-2-2">2010-2011学年第二学期(春)(三学期)</option>
+
+                                            <option value="2010-2011-3-2">2010-2011学年第三学期(夏)(三学期)</option>
+
+                                            <option value="2011-2012-1-2">2011-2012学年第一学期(秋)(三学期)</option>
+
+                                            <option value="2011-2012-2-2">2011-2012学年第二学期(春)(三学期)</option>
+
+                                            <option value="2012-2013-1-2">2012-2013学年第一学期(秋)(三学期)</option>
+
+                                            <option value="2012-2013-2-2">2012-2013学年第二学期(春)(三学期)</option>
+
+                                            <option value="2013-2014-1-2">2013-2014学年第一学期(秋)(三学期)</option>
+
+                                            <option value="2013-2014-2-2">2013-2014学年第二学期(春)(三学期)</option>
+
+                                            <option value="2014-2015-1-2">2014-2015学年第一学期(秋)(三学期)</option>
+
+                                            <option value="2014-2015-2-2">2014-2015学年第二学期(春)(三学期)</option>
+
+                                            <option value="2015-2016-1-2">2015-2016学年第一学期(秋)(三学期)</option>
+
+                                            <option value="2015-2016-2-2">2015-2016学年第二学期(春)(三学期)</option>
+
+                                            <option value="2016-2017-1-2">2016-2017学年第一学期(秋)(三学期)</option>
+
+                                            <option value="2016-2017-2-2">2016-2017学年第二学期(春)(三学期)</option>
+
+                                            <option value="2017-2018-1-2" selected="selected">2017-2018学年第一学期(秋)(三学期)
+                                            </option>
+
+                                        </select>
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td class="fieldName"></td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td height="3" colspan="7"></td>
+                                </tr>
+                                <tr>
+                                    <td class="fieldName">校区:</td>
+                                    <td>&nbsp;</td>
+                                    <td><select name="zxXaq" class="select" style="width:160"
+                                                onChange="changelocation(document.zxForm.zxXaq.options[document.zxForm.zxXaq.selectedIndex].value)">
+                                        <option value="">请选择</option>
+
+                                        <option value="01">校本部</option>
+
+                                        <option value="02" selected>宏福校区</option>
+
+                                        <option value="03">校外</option>
+
+                                        <option value="04">沙河校区</option>
+
+                                        <option value="100">教师自行安排考试</option>
+
+                                    </select>
+                                    </td>
+                                    <td width="30">&nbsp;</td>
+                                    <td class="fieldName">教学楼:&nbsp;</td>
+                                    <td>
+                                        <select name="zxJxl" class="select" style="width:130"
+                                                onChange="changelocationClassroom(document.zxForm.zxXaq.options[document.zxForm.zxXaq.selectedIndex].value,document.zxForm.zxJxl.options[document.zxForm.zxJxl.selectedIndex].value)">
+                                            <option value="">请选择</option>
+
+                                            <option value="宏01">宏福一号楼</option>
+
+                                            <option value="宏02">宏福二号楼</option>
+
+                                            <option value="体育场">体育场</option>
+
+                                            <option value="自行安排">教师自行安排</option>
+
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td height="3" colspan="7"></td>
+                                </tr>
+                                <tr>
+                                    <td class="fieldName">周次:
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td><input type="text" name="zxZc" readonly="true" value="">&nbsp;
+                                        <img src="/img/icon/calendar.jpg"
+                                             onclick="xzzc('/xszxcxAction.do?oper=xzzc');" style="cursor:hand;"
+                                             title="选择周次">&nbsp&nbsp
+                                        <img src="/img/icon/delete.gif" onclick="qkZc();" style="cursor:hand;"
+                                             title="清空周次">
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td class="fieldName">
+                                        节次:&nbsp;
+                                    </td>
+                                    <td><input type="text" name="zxJc" readonly="true" value="">&nbsp;
+                                        <img src="/img/icon/calendar.jpg"
+                                             onclick="xzjc('/xszxcxAction.do?oper=xzjc');" style="cursor:hand;"
+                                             title="选择节次">
+                                        <img src="/img/icon/delete.gif" onclick="qkJc();" style="cursor:hand;"
+                                             title="清空节次">
+                                    </td>
+
+
+                                </tr>
+                                <tr>
+                                    <td height="3" colspan="7"></td>
+                                </tr>
+                                <tr>
+                                    <td class="fieldName">星期:
+                                    </td>
+                                    <td>&nbsp;</td>
+                                    <td><input type="text" name="zxxq" readonly="true" value="">&nbsp;
+                                        <img src="/img/icon/calendar.jpg"
+                                             onclick="xzxq('/xszxcxAction.do?oper=xzxq');" style="cursor:hand;"
+                                             title="选择星期">&nbsp&nbsp
+                                        <img src="/img/icon/delete.gif" onclick="qkxq();" style="cursor:hand;"
+                                             title="清空星期">
+                                    </td>
+
+                                </tr>
+
+
+                            </table>
+                            <table align="center" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td height="10"></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <img src="/img/search.gif" onclick="tjcx();" id="btnSearch" style="cursor:hand;"
+                                             title="">
+
+                                    </td>
+
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+
+
+    <!-- 分割线 -->
+    <table width="99%" border="0" align="center" cellpadding="0"
+           cellspacing="0">
+        <tr>
+            <td class="Line"></td>
+        </tr>
+    </table>
+
+    <!-- 列表开始 -->
+    <table width="100%" border="0" cellpadding="0" cellspacing="0" class="titleTop2">
+        <tr>
+            <td class="pageAlign">
+                <table cellpadding="0" width="100%" class="displayTag" cellspacing="1" border="0" id="user">
+                    <thead>
+                    <tr>
+                        <th width="40" class="sortable">序号</th>
+                        <th width="40" class="sortable">校区</th>
+                        <th width="100" class="sortable">教学楼</th>
+                        <th width="100" class="sortable">教室</th>
+                        <th width="100" class="sortable">类型</th>
+                        <th width="122" class="sortable">座位数</th>
+                        <th width="50" class="sortable">查看</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+    <!-- 列表结束 -->
+    <div align="right">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td align="right">共0项&nbsp;&nbsp;第1/0页&nbsp;&nbsp;<img title="第一页" src="/img/icon/noDownDM2.gif"
+                                                                       style="vertical-align:center;" width="11"
+                                                                       height="11"/>&nbsp;<img title="前一页"
+                                                                                               src="/img/icon/noDownDM_2.gif"
+                                                                                               style="vertical-align:center;"
+                                                                                               width="11"
+                                                                                               height="11"/><img
+                        title="下一页" src="/img/icon/noUpDM_2.gif" style="vertical-align:center;" width="11" height="11"/>&nbsp;<img
+                        title="最后一页" src="/img/icon/noUpDM2.gif" style="vertical-align:center;" width="11" height="11"/>&nbsp;&nbsp;每页显示的记录数&nbsp;<select
+                        name="pageSize" onchange="pageSizeChange()">
+                    <option value="10">10项</option>
+                    <option value="20" selected='selected'>20项</option>
+                    <option value="30">30项</option>
+                    <option value="40">40项</option>
+                    <option value="50">50项</option>
+                    <option value="100">100项</option>
+                    <option value="200">200项</option>
+                    <option value="300">300项</option>
+                </select><input name="page" type="hidden" id="page" value="1">&nbsp;<input name="currentPage"
+                                                                                           type="hidden"
+                                                                                           id="currentPage" value="1">&nbsp;<input
+                        name="pageNo" type="text" id="pageNo" size="3" onKeyPress="return   handleEnterOnPageNo();">&nbsp;<img
+                        src="/img/icon/go.gif" name="goto" id="goto" style="cursor:hand;" title="跳转到"
+                        onClick="forward();">
+                    <script type='text/javaScript'>
+                        function forward() {
+                            if (!(/^([1-9])(\d{0,})(\d{0,})$/.test(document.all.pageNo.value))) {
+                                alert("请输入合法的页号！");
+                                document.all.pageNo.focus();
+                                return false;
+                            }
+                            if (document.all.pageNo.value > 0) {
+                                alert("输入的页数超过了总页数，请重新输入！");
+                                document.all.pageNo.focus();
+                                return false;
+                            }
+                            window.location.href = "/xszxcxAction.do?totalrows=0&page=" + document.all.pageNo.value + "&pageSize=" + document.all.pageSize.value;
+                        }
+
+                        function handleEnterOnPageNo() {
+                            if (event.keyCode == 13) {
+                                forward();
+                                return false;
+                            }
+                            return true;
+                        }
+
+                        function pageSizeChange() {
+                            window.location.href = "/xszxcxAction.do?totalrows=0&pageSize=" + document.all.pageSize.value;
+                        }
+
+                        function pagination(value) {
+                            window.location.href = "/xszxcxAction.do?totalrows=0&page=" + value + "&pageSize=" + document.all.pageSize.value;
+                        }</script>
+                </td>
+            </tr>
+        </table>
+    </div>
+</form>
+</body>
+</html>

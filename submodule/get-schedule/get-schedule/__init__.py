@@ -13,7 +13,8 @@ password = input('password:')
 s = requests.session()
 s.get('http://jwxt.bupt.edu.cn/')
 while True:
-    captchaImage = Image.open(BytesIO(s.get('http://jwxt.bupt.edu.cn/validateCodeAction.do?random=').content))
+    captchaImage = Image.open(
+        BytesIO(s.get('http://jwxt.bupt.edu.cn/validateCodeAction.do?random=').content))
     captchaImage = captchaImage.convert('L')
     captchaText = pytesseract.image_to_string(captchaImage)
     loginSuccessPage = s.post('http://jwxt.bupt.edu.cn/jwLoginAction.do',
@@ -30,7 +31,12 @@ table = etree.HTML(s.get('http://jwxt.bupt.edu.cn/xkAction.do?actionType=6').tex
 
 str = ''
 for i in table:
-    for j in i.xpath('td/text()'):
+    if len(i) == 1:
+        continue
+    leftPos = 2 if len(i) == 9 else 1
+    for j in i.xpath('td/text()')[leftPos:]:
         str += j.strip() + ':'
     str += '\n'
-print(str)
+f = open('schedule.txt', 'w')
+f.write(str)
+f.close()
