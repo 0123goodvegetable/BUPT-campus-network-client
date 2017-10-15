@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <iterator>
+#include <ncurses.h>
 using std::cin;
 using std::cout;
 using std::endl;
@@ -41,16 +42,49 @@ vector<string> split(string str, string pattern){
         return_string.push_back(str.substr(start));
     return return_string;
 }
+//Show classes
+void show(vector<string> string_wrapper){
+   int length = string_wrapper.size();
+   string * classes = new string[length];
+   std::vector<string>::iterator iter = string_wrapper.begin();
+   //Remove '\n'
+   //for (; iter != string_wrapper.end(); iter++){
+   //    if (*iter = '\n');
+   //}
+   //iter = string_wrapper.begin();
+   for (int i = 0; iter != string_wrapper.end(); iter++, i++){
+       classes[i] = *iter;
+   }
+   WINDOW * inner_win;
+   int height, width, start_x, start_y;
+   int inter;
+   initscr();
+
+   height = 20;
+   width = 60;
+   inter = width/5;
+
+   start_y = (LINES-height)/2;
+   start_x = (COLS-width)/2;
+
+   refresh();
+   inner_win = newwin(height, width, start_y, start_x);
+   box(inner_win, 0, 0);
+   for (int i = 0; i < length; i++){
+       mvwprintw(inner_win, ((i%5)*4)+1, 1+((i/5)*inter), classes[i].c_str());
+   }
+   wrefresh(inner_win);
+   getch();
+   delete [] classes;
+   endwin();
+}
 
 int main(){
     string filename = "/Users/James/Desktop/test.txt";
     string str = read_into_string(filename);
     string pattern = ":";
     vector<string> result = split(str, pattern);
-    cout << "The result: " << endl;
-    for (int i = 0; i < result.size(); i++){
-        cout << result[i] << endl;
-    }
+    show(result);
     return 0;
 }
 
