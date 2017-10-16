@@ -60,6 +60,10 @@ void show(vector<string> string_wrapper){
    int inter;
    initscr();
 
+   start_color();
+   init_pair(1, COLOR_BLACK, COLOR_WHITE);
+   
+
    height = 20;
    width = 60;
    inter = width/5;
@@ -73,6 +77,7 @@ void show(vector<string> string_wrapper){
    for (int i = 0; i < length; i++){
        mvwprintw(inner_win, ((i%5)*4)+1, 1+((i/5)*inter), classes[i].c_str());
    }
+   wbkgd(inner_win, COLOR_PAIR(1));
    wrefresh(inner_win);
    getch();
    delete [] classes;
